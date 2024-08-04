@@ -1,95 +1,120 @@
-body{
-    box-sizing: border-box;
-    background-color: rgb(213, 255, 63);
+:root {
+  --color-blue: #233d4a;
+  --color-light-blue: #a8bec9;
+  --color-dark-blue: #192a32;
+  --color-darker-blue: #112129;
+  --color-orange: #f2b237;
+  --color-aqua: #31c4be;
+  --border-radius: 1rem;
+  --grid-rows: 3;
 }
 
-.game{
-    width: 489px;
-    /* text-align: center;
-    vertical-align: center; */
-    font-family: system-ui;
-    color: #fff;
-    margin: auto ;
-    /* display: flex;
-    justify-items: stretch;
-    flex-direction: column; */
+* {
+  box-sizing: border-box;
+  margin: 0;
 }
 
-.title{
-    background-color: #f25;
-    padding: 30px 0;
-    margin: 5px 0;
-    font-size: 30px;
-    font-weight: 700;
-    width: 100%;
-    text-align: center;
+html {
+  font-size: 62.5%;
 }
 
-span{
-    color: rgb(0, 255, 34);
+body {
+  font-family: Arial, sans-serif;
 }
 
-.items{
-    display: grid;
-    grid-template-columns: repeat(3, 60px);
-    grid-gap: 5px;
-    justify-content: center;
-    align-items: center;
-}
-.square{
-    width: 60px;
-    height: 60px;
-    background-color: #f25;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 30px;
-    font-weight: 500;
-    cursor: pointer;
-    /* float: left;
-    margin: 2px; */
+.container {
+  font-size: 1.6rem;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  /*background-color: var(--color-dark-blue);*/
+  background-size: cover;
+  backdrop-filter: blur(5px);
+  overflow: hidden;
 }
 
-.square:hover{
-    background-color: black;
+.container:before {
+  content: "";
+  position: absolute;
+  width: 130%;
+  height: 130%;
+  opacity: .8;
+  background: url(./pattern.jpg);
+  background-size: cover;
+  filter: blur(35px);
+  z-index: -1;
 }
 
-@media (max-width: 778px){
-    :root{
-        --square-size: 130px;
-    }
-    .title {
-        width: 100%;
-    }
-    .game{
-        grid-gap: 5px;
-        display: flex;
-        width: 100%;
-        grid-gap: 5px;
-        display: flex;
-        flex-direction: column;
-        justify-items: stretch;
-        /* align-items: flex-start; */
-        padding: auto;
-        margin: auto;
-    }
-    .square {
-        width: var(--square-size);
-        height: var(--square-size);
-        background-color: #f25;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 100px;
-        font-weight: 500;
-        cursor: pointer;
-    }
-    .items {
-        display: grid;
-        grid-template-columns: repeat(3, var(--square-size));
-        grid-gap: 5px;
-        justify-content: center;
-        align-items: center;
-    }
-    
+.board {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-rows), 100px);
+  grid-template-rows: repeat(var(--grid-rows), 100px);
+  margin: 0 auto;
+  gap: 1.5rem;
+}
+
+.cell {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 3em;
+  color: var(--color-aqua);
+  background-color: var(--color-blue);
+  border-radius: var(--border-radius);
+  isolation: isolate;
+  font-family: 'Rubik Mono One', sans-serif;
+}
+
+.cell--X {
+  color: var(--color-aqua);
+}
+
+.cell--O {
+  color: var(--color-orange);
+}
+
+.value {
+  z-index: 1;
+  user-select: none;
+}
+
+.cell:before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  bottom: -0.4rem;
+  border-radius: calc(var(--border-radius) / 2);
+  background-color: var(--color-darker-blue);
+}
+
+.cell:after {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  border-radius: calc(var(--border-radius) / 2);
+  background-color: var(--color-blue);
+  transition: all 0.3s;
+}
+
+#reset {
+  display: block;
+  margin: 20px auto;
+  cursor: pointer;
+  background: none;
+  outline: none;
+  border: 1px solid var(--color-aqua);
+  border-radius: calc(var(--border-radius) / 4);
+  padding: .4rem .8rem;
+  color: var(--color-aqua);
+}
+
+.number-of-rows-label {
+  color: var(--color-orange);
 }
